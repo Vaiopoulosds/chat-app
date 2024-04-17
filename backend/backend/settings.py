@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'chat',
 ]
 
 CORS_ALLOWED_ORIGINS = [
