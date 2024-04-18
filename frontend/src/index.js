@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import {
@@ -11,11 +11,32 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchInterval: 20000,
+    },
+  },
+});
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/">
+      <Route index element={<App></App>}></Route>
+    </Route>
+  )
+);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
