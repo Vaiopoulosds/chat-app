@@ -3,8 +3,8 @@ from rest_framework.routers import DefaultRouter
 from .views import MessageViewSet, ConversationViewSet,UserHandleViewSet,UserLoginView,UserLogOutView
 
 router = DefaultRouter()
-router.register('messages', MessageViewSet)
-router.register('conversations', ConversationViewSet)
+router.register('messages', MessageViewSet, basename="messages")
+router.register('conversations', ConversationViewSet, basename="conversations")
 router.register('users', UserHandleViewSet)
 
 urlpatterns =[

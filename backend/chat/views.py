@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import action,authentication_classes
 from django.contrib.auth import get_user_model, login,logout
+from django.db.models import Q
 from .models import Message, Conversation
 from .serializers import MessageSerializer, ConversationSerializer, UserSerializer,UserLoginSerializer
 
@@ -12,12 +13,19 @@ UserModel = get_user_model()
 
 
 class ConversationViewSet(ModelViewSet):
-  queryset=Conversation.objects.all()
   serializer_class = ConversationSerializer
 
+  def get_queryset(self):
+    user = self.request.user
+    return Conversation.objects.filter(Q(user1__id =user.id) | Q(user2__id = user.id))
+  
 class MessageViewSet(ModelViewSet):
-  queryset = Message.objects.all()
   serializer_class = MessageSerializer
+
+  def get_queryset(self):
+    user = self.request.user
+    conversations = Conversation.objects.filter(Q(user1__id =user.id) | Q(user2__id = user.id))
+    return Message.objects.filter(conversation__in =conversations)
 
 class UserHandleViewSet(ModelViewSet):
   queryset = UserModel.objects.all()
