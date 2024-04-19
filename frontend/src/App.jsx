@@ -21,34 +21,36 @@ function App() {
               Select the one you want to talk to <br />
               Start a conversation!
             </p>
-            <a href="/register" className="btn btn-primary">Register</a>
+            <a href="/register" className="btn btn-info">Register</a>
           </div>
           <div className="col-12 col-lg-3 no-color">
             <h2>Already a user?? </h2>
             <form>
-              <div className="mb-3">
-                <label for="username" className="form-label">
-                  Username
-                </label>
+              <div className="form-floating mb-3">
                 <input
                   type="text"
                   className="form-control"
                   id="username"
                   aria-describedby="username"
+                  placeholder="username"
                 />
-              </div>
-              <div className="mb-3">
-                <label for="password" className="form-label">
-                  Password
+                <label for="username" className="form-label">
+                  Username
                 </label>
+              </div>
+              <div className="form-floating mb-3">
                 <input
                   type="password"
                   className="form-control"
                   id="password"
+                  placeholder="password"
                 />
+                <label for="password" className="form-label">
+                  Password
+                </label>
               </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
+              <button type="submit" className="btn btn-info">
+                Login
               </button>
             </form>
           </div>

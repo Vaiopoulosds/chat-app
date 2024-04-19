@@ -15,6 +15,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Dashboard from "./pages/dashboard";
 import Register from "./pages/register";
+import Conversation from "./pages/currentConversation";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route index element={<App></App>}></Route>
       <Route path="dashboard" element={<Dashboard></Dashboard>}></Route>
       <Route path="register" element={<Register></Register>}></Route>
+      <Route path="conversation" element={<Conversation></Conversation>}></Route>
     </Route>
   )
 );
@@ -37,7 +39,7 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg nav-color">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
           MyChat
@@ -66,8 +68,13 @@ root.render(
                   Dashboard
                 </a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/conversation">
+                  Conversation
+                </a>
+              </li>
               <li className="nav-item ms-lg-auto">
-                <a className="nav-link bg-info" href="/register">
+                <a className="nav-link btn bg-info" href="/register">
                   <b>Register</b>
                 </a>
               </li>
