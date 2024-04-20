@@ -1,5 +1,5 @@
 from rest_framework import permissions, status
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet , GenericViewSet ,mixins
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model, login,logout
 from django.db.models import Q
 from .models import Message, Conversation
 from .serializers import MessageSerializer, ConversationSerializer, UserSerializer,UserLoginSerializer
+import json
 
 UserModel = get_user_model()
 
@@ -30,35 +31,23 @@ class MessageViewSet(ModelViewSet):
 class UserHandleViewSet(ModelViewSet):
   queryset = UserModel.objects.all()
   serializer_class= UserSerializer
+  permission_classes = [permissions.IsAuthenticated]
 
-  @action(detail=True, methods=["GET","PUT","DELETE"], permission_classes = [permissions.IsAuthenticated])
-  def me(self,request):
-    user = UserModel.objects.get(user_id = request.user.id)
-    if request.method == 'GET':
-      serializer = UserSerializer(user)
-      return Response(serializer.data)
-    elif request.method =="PUT":
-      serializer = UserSerializer(user, data=request.data)
-      serializer.is_valid(raise_exception=True)
-      serializer.save()
-      return Response(serializer.data)
-    elif request.method == "DELETE":
-      instance = self.get_object()
-      self.perform_destroy(instance)
-      return Response(status=status.HTTP_204_NO_CONTENT)
-      
-
+class UserDetailView(APIView):
+  def get(self, request):
+    serializer= UserSerializer(request.user)
+    return Response(serializer.data, status= status.HTTP_200_OK)
 
 class UserLoginView(APIView):
   permission_classes = (permissions.AllowAny,)
   authentication_classes= (SessionAuthentication,)
   
   def post(self,request):
-    data = request.data
-    serializer = UserLoginSerializer(data=data)
+    serializer = UserLoginSerializer(data= request.data)
     if serializer.is_valid(raise_exception=True):
-      user = serializer.check_user(data)
+      user = serializer.check_user(request.data)
       login(request,user)
+      serializer = UserSerializer(request.user)
       return Response(serializer.data,status= status.HTTP_200_OK)
     
   

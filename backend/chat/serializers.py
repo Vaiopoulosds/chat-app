@@ -28,12 +28,12 @@ class UserLoginSerializer(serializers.ModelSerializer):
   password = serializers.CharField()
   class Meta:
     model = UserModel
-    fields = ("username","password")
+    fields = ["username","password"]
 
 
   def check_user(self, data):
     user = authenticate(username= data['username'], password= data['password'])
     if not user :
       raise ValidationError("User not found")
-    return user
+    return (user)
 

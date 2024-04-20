@@ -26,7 +26,7 @@ const Register = () => {
               placeholder="username"
               required
             />
-            <label for="username" className="form-label">
+            <label htmlFor="username" className="form-label">
               Username
             </label>
           </div>
@@ -38,7 +38,7 @@ const Register = () => {
               placeholder="name"
               required
             />
-            <label for="name" className="form-label">
+            <label htmlFor="name" className="form-label">
               Name
             </label>
           </div>
@@ -50,7 +50,7 @@ const Register = () => {
               placeholder="lastName"
               required
             />
-            <label for="lastName" className="form-label">
+            <label htmlFor="lastName" className="form-label">
               Last Name
             </label>
           </div>
@@ -62,7 +62,7 @@ const Register = () => {
               placeholder="email"
               required
             />
-            <label for="email" className="form-label">
+            <label htmlFor="email" className="form-label">
               Email
             </label>
           </div>
@@ -74,7 +74,7 @@ const Register = () => {
               placeholder="password"
               required
             />
-            <label for="password" className="form-label">
+            <label htmlFor="password" className="form-label">
               Password
             </label>
           </div>
@@ -86,7 +86,7 @@ const Register = () => {
               placeholder="repeatPassword"
               required
             />
-            <label for="repeatPassword" className="form-label">
+            <label htmlFor="repeatPassword" className="form-label">
               Repeat Password
             </label>
           </div>
