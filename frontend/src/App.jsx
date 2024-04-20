@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import Home from "./pages/home";
 import Dashboard from "./pages/dashboard";
-import { useGetUsers } from "./queryHooks/getusers";
+import { useGetCurrentUser } from "./queryHooks/getcurrecntUser";
 
 function App() {
+  const {isSuccess} = useGetCurrentUser()
   const [isLoggedIn, setIsLoggedIn] = useState();
-  const {data, isSuccess} = useGetUsers()
 
   useEffect(() =>{
     if (isSuccess) setIsLoggedIn(true)
     else setIsLoggedIn(false)
   }, [isSuccess])
 
-  if (isLoggedIn) return <Dashboard></Dashboard>
-  else return <Home />;
+  if (isLoggedIn) return <Dashboard setIsLoggedIn={setIsLoggedIn}></Dashboard>
+  else return <Home setIsLoggedIn={setIsLoggedIn}/>;
 }
 
 export default App;

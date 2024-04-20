@@ -16,7 +16,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Dashboard from "./pages/dashboard";
 import Register from "./pages/register";
 import Conversation from "./pages/currentConversation";
-import Home from "./pages/home";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,7 +31,7 @@ const router = createBrowserRouter(
       <Route index element={<App></App>}></Route>
       <Route path="dashboard" element={<Dashboard></Dashboard>}></Route>
       <Route path="register" element={<Register></Register>}></Route>
-      <Route path="conversation" element={<Conversation></Conversation>}></Route>
+      <Route path="conversation/:username" element={<Conversation></Conversation>}></Route>
     </Route>
   )
 );

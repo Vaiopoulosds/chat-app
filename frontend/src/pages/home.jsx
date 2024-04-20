@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLogin } from "../queryHooks/login";
 
-function Home() {
+function Home({setIsLoggedIn}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { mutate ,data } = useLogin();
+  const { mutate } = useLogin();
 
 
   const handleLogin = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const params = { username, password };
     mutate(params);
+    setIsLoggedIn(true)
   };
+  
+
 
   return (
     <>
@@ -120,7 +123,9 @@ function Home() {
               <button
                 type="submit"
                 className="btn btn-info"
-                onClick={(e)=>{handleLogin(e)}}
+                onClick={(e) => {
+                  handleLogin(e);
+                }}
               >
                 Login
               </button>
