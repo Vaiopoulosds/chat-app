@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Home from "./pages/home";
-import Dashboard from "./pages/dashboard";
+import Home from "./components/home";
+import Dashboard from "./components/dashboard";
 import { useGetCurrentUser } from "./queryHooks/getcurrecntUser";
 
 function App() {

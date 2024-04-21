@@ -1,74 +1,29 @@
 import { useState } from "react";
 import { useLogin } from "../queryHooks/login";
+import HomeNav from "./homeRegisterNav";
 
-function Home({setIsLoggedIn}) {
+function Home({ setIsLoggedIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { mutate } = useLogin();
-
 
   const handleLogin = (e) => {
     e.preventDefault();
     const params = { username, password };
     mutate(params);
-    setIsLoggedIn(true)
+    setIsLoggedIn(true);
   };
-  
-
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg nav-color">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="/">
-            MyChat
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <div className="container mw-100">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/">
-                    Home
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/dashboard">
-                    Dashboard
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/conversation">
-                    Conversation
-                  </a>
-                </li>
-                <li className="nav-item ms-lg-auto">
-                  <a className="nav-link btn bg-info" href="/register">
-                    <b>Register</b>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
-      <div className="container text-center mw-100 back-color ">
-        <h1 className="display-1">Welcome to MyChat</h1>
+      <HomeNav></HomeNav>
+      <div className="container text-center mw-100 bg-gradient back-color ">
+        <h1 className="display-1">This is.. MyChat</h1>
       </div>
       <div className="container text-center no-color">
         <div className="row d-flex justify-content-around flex-wrap">
           <div className="col-12 col-lg-5 no-color">
-            <h2>Sooooo what are we doing here...</h2>
+            <h2>What is going on here...</h2>
             <p className="p">
               This is a place where you can meet online with your friends and
               chat!! <br />
@@ -76,13 +31,14 @@ function Home({setIsLoggedIn}) {
               your friends in real time!!
             </p>
             <h3 className="mt-5">Then what??</h3>
-            <p className="p">
-              Then the steps are simple... <br />
-              Find all the users <br />
-              Select the one you want to talk to <br />
-              Start a conversation!
-            </p>
-            <a href="/register" className="btn btn-info">
+            <div className="container text-start col-8">
+            <ol>
+              <li>Find all the users</li>
+              <li>Select the one you want to talk to </li>
+              <li>Start a conversation!</li>
+            </ol>
+            </div>
+            <a href="/register" className="btn btn-warning">
               Register
             </a>
           </div>

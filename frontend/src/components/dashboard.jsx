@@ -1,68 +1,16 @@
 import { useGetCurrentUser } from "../queryHooks/getcurrecntUser";
-import { useLogout } from "../queryHooks/logout";
-import { useGetUsers } from "./../queryHooks/getusers";
+import { useGetUsers } from "../queryHooks/getusers";
 import { useGetUserConversations } from "../queryHooks/getUserConversations";
+import AuthUserNav from "./authUserNav";
 
-const Dashboard = ({ setIsLoggedIn }) => {
+const Dashboard = () => {
   const { data: currentUser } = useGetCurrentUser();
   const { data: conversations } = useGetUserConversations();
-  const { mutate } = useLogout();
   const { data: users } = useGetUsers();
-
-  const handleLogout = () => {
-    mutate();
-    setIsLoggedIn(false);
-  };
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg nav-color">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="/">
-            MyChat
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <div className="container mw-100">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/">
-                    Home
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/dashboard">
-                    Dashboard
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/conversation">
-                    Conversation
-                  </a>
-                </li>
-                <li className="nav-item ms-lg-auto">
-                  <button
-                    className="nav-link btn bg-info"
-                    onClick={handleLogout}
-                  >
-                    <b>Logout</b>
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <AuthUserNav></AuthUserNav>
       <h2 className="display-6 bg-info-subtle pt-2 pb-2 text-capitalize">
         {" "}
         {currentUser?.data.username}

@@ -8,7 +8,6 @@ from django.contrib.auth import get_user_model, login,logout
 from django.db.models import Q
 from .models import Message, Conversation
 from .serializers import MessageSerializer, ConversationSerializer, UserSerializer,UserLoginSerializer
-import json
 
 UserModel = get_user_model()
 
@@ -28,6 +27,12 @@ class MessageViewSet(ModelViewSet):
     user = self.request.user
     conversations = Conversation.objects.filter(Q(user1__id =user.id) | Q(user2__id = user.id))
     return Message.objects.filter(conversation__in =conversations)
+class MessagePerConversationViewSet(ModelViewSet):
+  serializer_class = MessageSerializer
+
+  def get_queryset(self):
+    conversation = self.kwargs.get('id')
+    return Message.objects.filter(conversation_id =conversation)
 
 class UserHandleViewSet(ModelViewSet):
   http_method_names = ['get', 'post','put', 'patch', 'delete', 'head', 'options']

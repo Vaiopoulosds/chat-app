@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import { useGetCurrentUser } from "../queryHooks/getcurrecntUser";
 import { useCreateUser } from "../queryHooks/createNewUser";
-import { useLogin } from "../queryHooks/login";
+import HomeNav from "./homeRegisterNav";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -18,7 +16,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      document.getElementById("alertdiv").classList.add('show');
+      document.getElementById("alertdiv").classList.add("show");
     }
   }, [isSuccess]);
 
@@ -29,8 +27,8 @@ const Register = () => {
     const params = { username, password, name, lastName, email };
     mutate(params);
     setTimeout(() => {
-      const path = '/'
-      navigate(path)
+      const path = "/";
+      navigate(path);
     }, 3000);
   };
   useEffect(() => {
@@ -46,51 +44,7 @@ const Register = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg nav-color">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="/">
-            MyChat
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <div className="container mw-100">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/">
-                    Home
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/dashboard">
-                    Dashboard
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/conversation">
-                    Conversation
-                  </a>
-                </li>
-                <li className="nav-item ms-lg-auto">
-                  <a className="nav-link btn bg-info" href="/register">
-                    <b>Register</b>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
-
+      <HomeNav></HomeNav>
       <div className="container text-center mw-100 back-color">
         <h2 className="display-4">Registration Form</h2>
         <p className="p">
@@ -104,14 +58,13 @@ const Register = () => {
           The information bellow are required so that we can create your user
           account.
         </p>
-
       </div>
       <div
-          id="alertdiv"
-          className=" container col-3 alert alert-success fade text-center"
-        >
-          <h3>User Created!!</h3>
-        </div>
+        id="alertdiv"
+        className=" container col-3 alert alert-success fade text-center"
+      >
+        <h3>User Created!!</h3>
+      </div>
       <div className="container col-lg-3 text-center no-color">
         <form id="form" noValidate>
           <div className="form-floating mb-3">

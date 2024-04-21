@@ -1,12 +1,12 @@
-import { useMutation, useQueryClient} from '@tanstack/react-query'
-import { request } from "../utils/axios-utils"
+import {useQuery} from '@tanstack/react-query'
+import { request } from '../utils/axios-utils'
 
-
-const specificConversation =(params) =>{
-  return request({url:`/user-conversation/${params.id}/`, method:"get"})
+const getConversation = (id) =>{
+  return request({url:`/user-conversation/${id}/`})
 }
 
-export const useRetrieveSpecificConversation = () => {
-  const queryClient = useQueryClient()
-  return useMutation({mutationFn:(params) => specificConversation(params)})
+
+export const useGetSpecificConversation = (id) => {
+  
+  return useQuery({queryKey:['conversation', id] ,queryFn: ()=>getConversation(id)} )
 }

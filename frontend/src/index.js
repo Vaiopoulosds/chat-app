@@ -13,14 +13,15 @@ import {
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Dashboard from "./pages/dashboard";
-import Register from "./pages/register";
-import Conversation from "./pages/currentConversation";
+import Dashboard from "./components/dashboard";
+import Register from "./components/register";
+import Conversation from "./components/currentConversation";
+import ErrorPage from "./components/404page";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchInterval: 20000,
+      refetchInterval: 5000,
     },
   },
 });
@@ -29,9 +30,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route index element={<App></App>}></Route>
-      <Route path="dashboard" element={<Dashboard></Dashboard>}></Route>
       <Route path="register" element={<Register></Register>}></Route>
-      <Route path="conversation/:username" element={<Conversation></Conversation>}></Route>
+      <Route path="conversation/:id" element={<Conversation></Conversation>}></Route>
+      <Route path="*" element={<ErrorPage></ErrorPage>}></Route>
     </Route>
   )
 );
