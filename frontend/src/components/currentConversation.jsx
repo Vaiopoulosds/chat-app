@@ -3,7 +3,6 @@ import { useGetSpecificConversation } from "../queryHooks/retrieveSpecificConver
 import AuthUserNav from "./authUserNav";
 import { useGetCurrentUser } from "../queryHooks/getcurrecntUser";
 import { useGetMessagesPerConversation } from "../queryHooks/getMessagesPerConversation";
-import { useGetUserById } from "../queryHooks/getUserById";
 import { useState } from "react";
 import { useSendMessage } from "../queryHooks/sendMessage";
 
@@ -17,7 +16,7 @@ const Conversation = (props) => {
   const { mutate } = useSendMessage();
   const [messageSend, setMessageSend] = useState("");
 
-  const dateConvertion = (date) => {
+  const dateConversion = (date) => {
     const newDate = new Date(date);
     return `${newDate.toLocaleTimeString()} - ${newDate.toLocaleDateString(
       "en-US",
@@ -54,7 +53,7 @@ const Conversation = (props) => {
           <ul className="list-group list-group-flush">
             {conversationMessages?.data.map((message) => (
               <li className="list-group-item bg-info-subtle" key={message.id}>
-                <small><u>{dateConvertion(message.timestamp)}</u></small> <br />{" "}
+                <small><u>{dateConversion(message.timestamp)}</u></small> <br />{" "}
                 <span className="text-primary">
                   {message.sender_info.username}
                 </span>

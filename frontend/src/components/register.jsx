@@ -16,7 +16,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      document.getElementById("alertdiv").classList.add("show");
+      document.getElementById("alertDiv").classList.add("show");
     }
   }, [isSuccess]);
 
@@ -60,7 +60,7 @@ const Register = () => {
         </p>
       </div>
       <div
-        id="alertdiv"
+        id="alertDiv"
         className=" container col-3 alert alert-success fade text-center"
       >
         <h3>User Created!!</h3>
