@@ -26,10 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -105,10 +103,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'chat_app',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': os.getenv('PASSWORD'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -167,3 +166,30 @@ CSRF_TRUSTED_ORIGINS =[
     'http://localhost:3000',
     'http://127.0.0.1:3000',
 ]
+
+LOGGING ={
+  'version' : 1,
+  'disable_existing_loggers': False,
+  'handlers' : {
+    'console': {
+      'class':'logging.StreamHandler'
+    },
+    'file':{
+      'class':'logging.FileHandler',
+      'filename': 'general.log',
+      'formatter':'verbose'
+    }
+  },
+  'loggers':{
+    '': {
+      'handlers':['console','file'],
+      'level':'WARNING'
+    }
+  },
+  'formatters':{
+    'verbose':{
+      'format': '{asctime} ({levelname}) -{name} -{message}',
+      'style' :'{'
+    }
+  }
+}
